@@ -1,0 +1,418 @@
+.loginTitle{
+  text-align: center;
+  color: black;
+  font-size: 30px;
+}
+
+.loginDiv{
+  background-color: white;
+  box-shadow: grey ;
+  text-align: center;
+  margin-left: 23rem;
+  margin-right: 23rem;
+  margin-bottom: 5rem;
+  /* margin: 0 20rem; */
+  border-radius: 10px;
+  padding: 1rem 3rem;
+}
+
+.loginDivh1{
+  color: black;
+}
+
+.loginDivp{
+  color: grey;
+}
+
+.loginEmailHolder{
+  padding-right: 2rem;
+  padding-bottom: 20px;
+}
+
+.loginForm{
+  /* padding-right: 2rem; */
+  width: 100%;
+  padding-top: 20px;
+}
+
+.loginEmailpHolder{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.loginEmailp{
+  text-align: left;
+  line-height: 0;
+}
+
+.loginEmailLink{
+  text-decoration: none;
+  color: rgb(50, 116, 83);
+}
+
+.loginEmailLink:hover{
+  cursor: pointer;
+}
+
+.loginInputEmail{
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  border: solid rgb(187, 187, 187) 1px;
+  border-radius: 10px;
+  width: 100%;
+  /* margin-right: 4rem; */
+}
+
+.viewPasswordBtn{
+  background-color: transparent;
+  position: absolute;
+  border: none;
+  top: 31.9rem;
+  right: 26.5rem;
+}
+
+.viewPasswordBtn:hover{
+  cursor: pointer;
+}
+
+.roleDownBtn{
+  background-color: transparent;
+    position: absolute;
+    border: none;
+    top: 38.3rem;
+    right: 26.5rem;
+}
+
+.roleDown:hover{
+  cursor: pointer;
+}
+
+.viewPasswordIcon{
+  color: rgb(107, 107, 107);
+}
+
+.roleDown{
+  color: rgb(107, 107, 107);
+}
+
+.loginPhoneSpan{
+  color: grey;
+}
+
+.loginBtn{
+  background-color: rgb(50, 116, 83);
+  border: solid grey 1px;
+  border-radius: 10px;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 13px 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.loginBtn:hover{
+  cursor: pointer;
+  background-color: rgb(15, 134, 75);
+}
+
+.signUpLink{
+  text-decoration: none;
+  color: rgb(50, 116, 83);
+}
+
+.signUpLinkHolder{
+  margin: 1rem;
+}
+
+.signUpLink:hover{
+  color: rgb(17, 163, 90);
+}
+
+.copyright{
+  font-size: 12px;
+  color: grey;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.copyrightIcon{
+  color: grey;
+}
+
+.viewTitle{
+  background-color: white;
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftViewTitle{
+  padding-left: 2rem;
+}
+
+.leftViewTitleSpan{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.rightViewTitle{
+  padding-right: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.viewProfile{
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  border: none;
+}
+
+.rightViewTitleUserName2{
+  padding-left: 10px;
+}
+
+.rightViewTitleUserName{
+  align-items: center;
+  padding-left: 1.5rem;
+}
+
+.rightViewTitleSpan{
+  font-weight: 600;
+}
+
+.viewh1{
+  padding-left: 2rem;
+}
+
+.searchRequestsDiv{
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  display: flex;
+}
+
+.searchIconDiv{
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon{
+  position: absolute;
+  left: 2.5rem;
+}
+
+.searchRequestsInput{
+  background-color: white;
+  color: black;
+  position: absolute;
+  border: none;
+  padding: 12px 40px;
+  margin-right: 1rem;
+  margin-left: 2rem;
+  width: 63.5rem;
+  border-radius: 10px;
+}
+
+
+.filterSearchDiv{
+  padding-right: 2rem;
+  display: flex;
+}
+
+.filterButton{
+  margin-left: 15px;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  padding:8px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filterButton:hover{
+  cursor: pointer;
+}
+
+.filterButton1{
+  margin-left: 15px;
+  border-radius: 10px;
+  border: none;
+  padding: 6px 15px;
+  display: flex;
+}
+
+.roleDownIcon{
+  /* position: absolute; */
+  right: 8.6rem;
+  top: 9.8rem;
+}
+
+.requestsContainer{
+  padding: 1rem 2rem;
+  /* display: flex; */
+}
+
+.singleRequestsHolder{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+.singleRequest{
+  background-color: white;
+  width: 26rem;
+  border-radius: 10px;
+  padding-bottom: 20px;
+  line-height: 1;
+}
+
+.mapImage{
+  width: 100%;
+  /* height: 100%; */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.upperSingleRequest{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+
+.singleRequestTitle{
+  padding-left: 1rem;
+  line-height: 1;
+}
+
+.singleRequestp1{
+  line-height: 0;
+  padding-left: 1rem;
+  color: grey;
+}
+
+.singleRequestp2{
+  line-height: 1;
+  padding-left: 1rem;
+  color: grey;
+}
+
+.singleRequestp3{
+  background-color: rgb(243, 193, 146);
+  color: rgb(136, 67, 3);
+  border-radius: 10px;
+  margin-left: 1rem;
+  padding: 2px 9px;
+}
+
+.singleRequestp4{
+  background-color: rgb(125, 219, 138);
+  color: rgb(2, 128, 18);
+    border-radius: 10px;
+    margin-left: 1rem;
+    padding: 2px 9px;
+}
+
+.singleRequestp5{
+  background-color: rgb(219, 125, 125);
+  color: rgb(128, 2, 2);
+  border-radius: 10px;
+  margin-left: 1rem;
+  padding: 2px 9px;
+}
+
+.addRequestButtonDiv{
+  display: flex;
+  justify-content: right;
+}
+
+.addRequestButton{
+  display: flex;
+  align-items: center;
+  background-color: rgb(50, 116, 83);
+  border: none;
+  margin: 1rem 2rem;
+  padding: 15px 1.5rem;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 20px;
+    right: 0;
+    z-index: 1000;
+}
+
+.addRequestButton:hover{
+  cursor: pointer;
+}
+
+.addRequestButton span{
+  padding-left: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* #root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
