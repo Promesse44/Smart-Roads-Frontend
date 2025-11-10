@@ -130,6 +130,7 @@ const View = () => {
           </div>
         </div>
       </div>
+      <Link to={"/request"}>
         <button className="addRequestButton">
           <Icon
             icon="material-symbols-light:add-rounded"
@@ -138,6 +139,7 @@ const View = () => {
           />
           <span>New Road Request</span>
         </button>
+      </Link>
     </>
   );
 };
