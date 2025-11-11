@@ -1,10 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SubmitRequest = () => {
+  const token = localStorage.getItem("token");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [address, setAddress] = useState("");
+  const [photo, setPhoto] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const latitude = -1.3792473621;
+  const longitude = 2.134879082134;
+
+  const navigate = useNavigate();
+
   const inputRef = useRef();
 
   const onFile = (file) => {
@@ -29,11 +39,39 @@ const SubmitRequest = () => {
     };
   }, [previewUrl]);
 
-  const removeImage = () => {
-    if (previewUrl) URL.revokeObjectUrl(previewUrl);
-    setPreviewUrl(null);
-    setSelectedFile(null);
-    if (inputRef.current) inputRef.current.value = "";
+  // const removeImage = () => {
+  //   if (previewUrl) URL.revokeObjectUrl(previewUrl);
+  //   setPreviewUrl(null);
+  //   setSelectedFile(null);
+  //   if (inputRef.current) inputRef.current.value = "";
+  // };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("photo", selectedFile);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("adress", address);
+    formData.append("latitude", latitude);
+    formData.append("longitude", longitude);
+
+    fetch("http://localhost:8000/request", {
+      method: "POST",
+      headers: {
+        // "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((output) => {
+        console.log(output);
+        alert(output.msg);
+        navigate("/view");
+      });
   };
 
   return (
@@ -43,13 +81,16 @@ const SubmitRequest = () => {
         <p className="subitRequestp">
           Fill out the details below to help us improve our Neighbourhood roads.
         </p>
-        <form action="submit" className="submitRequestForm">
+        <form className="submitRequestForm">
           <p className="requestTItlep">Request Title</p>
           <div className="submitTitleInputHolder">
             <input
               type="text"
               placeholder="eg: Nyanza Road"
               className="submitTitleInput"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
             />
           </div>
           <p className="requestTItlep1">Detailed description</p>
@@ -59,6 +100,16 @@ const SubmitRequest = () => {
               placeholder="Describe the issue and it's impact on the community, The  more detailed the better!"
               rows={10}
               className="submitTitleInput"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <p className="requestTItlep">Address</p>
+          <div className="submitTitleInputHolder">
+            <input
+              type="text"
+              placeholder="eg: Kicukiro"
+              className="submitTitleInput"
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <p className="requestTItlep12">Upload a Photo</p>
@@ -90,7 +141,7 @@ const SubmitRequest = () => {
               <p className="dropImgp1">PNG, JPG, GIF up to 10MB</p>
             </div>
           </div>
-          <div className="requestTItlep12Holder">
+          {/* <div className="requestTItlep12Holder">
             <p className="requestTItlep12">Pin the location</p>
             <Link className="locationLink">
               <Icon
@@ -109,10 +160,18 @@ const SubmitRequest = () => {
               placeholder="Drop and drag a photo or Click to Browse"
               className="submitTitleInput1"
             />
-          </div>
+          </div> */}
           <div className="submtitBtnsDiv">
-            <button className="submitRequestBtn1">Cancel</button>
-            <button className="submitRequestBtn">Submit Request</button>
+            <Link to={"/view"} className="submitRequestBtn1Link">
+              <button className="submitRequestBtn1">Cancel</button>
+            </Link>
+            <button
+              type="submit"
+              className="submitRequestBtn"
+              onClick={onSubmit}
+            >
+              Submit Request
+            </button>
           </div>
         </form>
       </div>

@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const View = () => {
+  const token = localStorage.getItem("token");
+  const [requests, setRequests] = useState([]);
+  const user = JSON.parse(localStorage.getItem("user"));
+  // const location = useLocation();
+
+  // const { user } = location.state;
+
+  useEffect(() => {
+    try {
+      fetch("http://localhost:8000/request", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((output) => {
+          console.log("Fecthed requests: ", output);
+          setRequests(output);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   return (
     <>
       <div className="viewTitle">
@@ -17,7 +43,7 @@ const View = () => {
             <button className="viewProfile"></button>
           </div>
           <div className="rightViewTitleUserName2">
-            <span className="rightViewTitleSpan">James Bond</span>
+            <span className="rightViewTitleSpan">{user.user_name}</span>
           </div>
         </div>
       </div>
@@ -60,6 +86,27 @@ const View = () => {
 
       <div className="requestsContainer">
         <div className="singleRequestsHolder">
+          {requests.map((request) => (
+            <div className="singleRequest">
+              <div className="mapImage">
+                <img
+                  src={`data:image/jpej;base64,${request.photo}`}
+                  alt="road"
+                />
+              </div>
+              <div className="lowerSingleRequest">
+                <h3 className="singleRequestTitle">{request.title}</h3>
+                <p className="singleRequestp1">
+                  Submitted on: {new Date(request.created_at).toLocaleString()}{" "}
+                  by {request.user_name}
+                </p>
+                <p className="singleRequestp2">{request.description}</p>
+                <span className="singleRequestp3">{request.status}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {/* <div className="singleRequestsHolder">
           <div className="singleRequest">
             <img src="/images.jpeg" alt="street map" className="mapImage" />
             <div className="lowerSingleRequest">
@@ -93,42 +140,7 @@ const View = () => {
               <span className="singleRequestp5">Rejected</span>
             </div>
           </div>
-        </div>
-        <div className="singleRequestsHolder">
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Karembure Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp3">Pending</span>
-            </div>
-          </div>
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Musanze Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp4">Approved</span>
-            </div>
-          </div>
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Masaka Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp5">Rejected</span>
-            </div>
-          </div>
-        </div>
+        </div> */}
       </div>
       <Link to={"/request"}>
         <button className="addRequestButton">

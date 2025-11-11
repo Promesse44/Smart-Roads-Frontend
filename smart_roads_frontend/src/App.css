@@ -71,8 +71,20 @@
   background-color: transparent;
   position: absolute;
   border: none;
-  top: 31.9rem;
-  right: 26.5rem;
+  top: 26.7rem;
+  right: 24.5rem;
+}
+
+.viewPasswordBtn1{
+  background-color: transparent;
+    position: absolute;
+    border: none;
+    top: 38.3rem;
+    right: 24.5rem;
+}
+
+.viewPasswordBtn1{
+  cursor: pointer;
 }
 
 .viewPasswordBtn:hover{
@@ -83,7 +95,7 @@
   background-color: transparent;
     position: absolute;
     border: none;
-    top: 38.3rem;
+    top: 44.7rem;
     right: 26.5rem;
 }
 
@@ -157,6 +169,8 @@
 
 .leftViewTitle{
   padding-left: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .leftViewTitleSpan{
@@ -188,6 +202,13 @@
 
 .rightViewTitleSpan{
   font-weight: 600;
+  line-height: 0;
+}
+
+.rightViewTitle {
+  font-size: 13px;
+  /* color: grey; */
+  line-height: 0;
 }
 
 .viewh1{
@@ -262,28 +283,45 @@
 
 .requestsContainer{
   padding: 1rem 2rem;
-  /* display: flex; */
 }
 
 .singleRequestsHolder{
   display: flex;
+  /* justify-content: space-between; */
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* .singleRequestsHolderOne {
+  display: flex;
   justify-content: space-between;
   padding-bottom: 1rem;
-}
+  flex-wrap: wrap;
+} */
 
 .singleRequest{
   background-color: white;
-  width: 26rem;
+  width: 30%;
   border-radius: 10px;
   padding-bottom: 20px;
   line-height: 1;
+  margin: 20px;
 }
 
 .mapImage{
   width: 100%;
-  /* height: 100%; */
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  height: 250px;
+  position: relative;
+}
+
+.mapImage img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+    border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
 }
 
 .upperSingleRequest{
@@ -294,11 +332,9 @@
 
 .singleRequestTitle{
   padding-left: 1rem;
-  line-height: 1;
 }
 
 .singleRequestp1{
-  line-height: 0;
   padding-left: 1rem;
   color: grey;
 }
@@ -525,6 +561,210 @@
   cursor: pointer;
   background-color: rgb(209, 209, 209);
 }
+
+.submitRequestBtn1Link{
+  text-decoration: none;
+}
+
+.approvalTitle{
+  background-color: white;
+  margin: 0;
+}
+
+.spna{
+  font-weight:500;
+  margin: 0 10px;
+}
+
+.rightViewTitleUserName1{
+  background-color: rgb(226, 226, 226);
+  padding: 7px;
+  align-items: center;
+  border-radius: 50px;
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.rightViewTitleUserName2{
+  padding-left: 10px;
+}
+
+.viewProfile1 {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: none;
+}
+
+.rightViewTitle1{
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.titleLink{
+  text-decoration: none;
+  color: rgb(50, 116, 83);
+  padding-left: 1rem;
+}
+
+.titleLink:hover {
+  cursor: pointer;
+  color: rgb(17, 163, 90);
+}
+
+.approvalH1{
+  margin-left: 6rem;
+  margin-right: 6rem;
+}
+
+.allApprovals{
+  margin: 0 6rem;
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  line-height: 0;
+  margin-bottom: 20px;
+  /* width: 100%; */
+}
+
+.approvedbydivHOlder{
+  display: flex;
+  margin-left: 6rem;
+  margin-right: 6rem;
+  margin-bottom: 2rem;
+  justify-content: space-between;
+}
+
+.approvedbydiv{
+  background-color: white;
+  padding: 1rem;
+  width: 29%;
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px rgb(194, 194, 194);
+}
+
+.approvedbyp{
+  color: grey;
+  line-height: 0;
+}
+
+.approvedbyh2{
+  padding-top: 10px;
+  line-height: 0;
+}
+
+.approvaldetails{
+  margin: 3rem 6rem;
+  background-color: white;
+  padding-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px rgb(177, 177, 177);
+}
+
+.approvalimage {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 250px;
+  position: relative;
+}
+
+.singleRequestp4 {
+  background-color: rgb(243, 193, 146);
+  color: rgb(136, 67, 3);
+  border-radius: 10px;
+  margin-left: 1rem;
+  padding: 2px 9px;
+  margin: 1rem 2rem;
+}
+
+.approvalDescription{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.approvalDescriptionp{
+  color: grey;
+}
+
+.statusHistory{
+  display: flex;
+  align-items: center;
+}
+
+.statusHistory2{
+  align-items: center;
+  padding-left: 20px;
+}
+
+.requestSubmittedath4{
+  line-height: 0;
+}
+
+.requestSubmittedatp{
+  line-height: 0;
+  color: grey;
+  font-size: 13px;
+}
+
+.statusHistoryIcon{
+  font-weight: 50px;
+  color: rgb(1, 156, 1);
+}
+
+.approvebtnsdivHolder{
+  margin: 0 2rem;
+}
+
+.approvebtnsdiv{
+  display: flex;
+  justify-content: space-between;
+}
+
+.noteHolder{
+  margin-right: 1.5rem;
+  padding-bottom: 20px;
+}
+
+.note{
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+  color: black;
+}
+
+.approveBTN{
+  width: 49%;
+  padding: 10px 0;
+  background-color: rgb(50, 116, 83);
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+}
+
+.approveBTN:hover {
+  cursor: pointer;
+  background-color: rgb(17, 163, 90);
+}
+
+.rejectBTN{
+  width: 49%;
+  background-color: rgb(185, 46, 46);
+  border-radius: 10px;
+  padding: 10px 0;
+  font-size: 17px;
+  border: none;
+}
+
+.rejectBTN:hover {
+  cursor: pointer;
+  background-color: rgb(219, 54, 54);
+}
+
+
 
 
 
