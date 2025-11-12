@@ -105,9 +105,12 @@ function App() {
           </button>
         </form>
         <div className="signUpLinkHolder">
-          <Link className="signUpLink" to={"/signup"}>
-            Sign up
-          </Link>
+          <p className="loginSpan">
+            <span>Don't have an account?</span>
+            <Link className="signUpLink" to={"/signup"}>
+              Sign up
+            </Link>
+          </p>
         </div>
         <p className="copyright">
           <Icon

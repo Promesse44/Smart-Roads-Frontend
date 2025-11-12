@@ -101,7 +101,33 @@ const View = () => {
                   by {request.user_name}
                 </p>
                 <p className="singleRequestp2">{request.description}</p>
-                <span className="singleRequestp3">{request.status}</span>
+                <span
+                  className="singleRequestp3"
+                  style={{
+                    color:
+                      request.status === "Pending"
+                        ? "rgb(136, 67, 3)"
+                        : request.status === "Approved"
+                        ? "rgb(50, 116, 83)"
+                        : request.status === "Rejected"
+                        ? "rgba(151, 43, 43, 1)"
+                        : request.status === "In_progress"
+                        ? "rgba(89, 44, 119, 1)"
+                        : "black",
+                    backgroundColor:
+                      request.status === "Pending"
+                        ? "rgb(243, 193, 146)"
+                        : request.status === "Approved"
+                        ? "rgba(91, 206, 149, 1)"
+                        : request.status === "Rejected"
+                        ? "rgba(221, 89, 89, 1)"
+                        : request.status === "In_progress"
+                        ? "rgba(161, 84, 212, 1)"
+                        : "black",
+                  }}
+                >
+                  {request.status}
+                </span>
               </div>
             </div>
           ))}

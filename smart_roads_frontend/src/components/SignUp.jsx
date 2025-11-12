@@ -112,6 +112,12 @@ const SignUp = () => {
             Sign up
           </button>
         </form>
+        <p className="loginSpan">
+          <span>Already have an account?</span>
+          <Link to={"/"} className="loginSpanLink">
+            Login
+          </Link>
+        </p>
         <p className="copyright">
           <Icon
             icon="la:copyright-solid"

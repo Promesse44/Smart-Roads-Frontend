@@ -10,8 +10,13 @@ const Approval = () => {
   const [approvals, setApprovals] = useState([]);
   const [visibleId, setVisibleId] = useState(null);
   const [approvalVisible, setApprovalVisible] = useState(true);
+  const [approvedByYouVisible, setApprovedByYouVisible] = useState(false);
+  const [approvalId, setApprovalId] = useState(null);
+  const [requestId, setRequestId] = useState(null);
+  const [status, setStatus] = useState("");
+  const [note, setNote] = useState("");
 
-  useEffect(() => {
+  const getApprovals = () => {
     fetch("http://localhost:8000/approvals", {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -20,8 +25,34 @@ const Approval = () => {
         setApprovals(output);
       });
     return;
-  }, [token]);
-  console.log(JSON.stringify(approvals, null, 2));
+  };
+
+  useEffect(() => getApprovals, [token]);
+  // console.log(JSON.stringify(approvals, null, 2));
+
+  const onApprove = (approval_Id, requestId, status, note) => {
+    // e.preventDefault();
+    fetch("http://localhost:8000/approve", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        approvalId: approval_Id,
+        requestId,
+        status,
+        note,
+      }),
+    })
+      .then((res) => res.json())
+      .then((output) => {
+        alert(output.message);
+        // console.log(output);
+        getApprovals();
+        setApprovalId(null);
+      });
+  };
 
   return (
     <>
@@ -50,21 +81,45 @@ const Approval = () => {
       <div className="approvedbydivHOlder">
         <div className="approvedbydiv">
           <p className="approvedbyp">Pending Approvals</p>{" "}
-          <h2 className="approvedbyh2">12</h2>
+          <h2 className="approvedbyh2">
+            {
+              approvals.filter(
+                (a) =>
+                  a.to_be_approved_by === user.user_type &&
+                  a.status === "Pending"
+              ).length
+            }
+          </h2>
         </div>
         <div className="approvedbydiv">
           <p className="approvedbyp">Approved by You</p>{" "}
-          <h2 className="approvedbyh2">20</h2>
+          <h2 className="approvedbyh2">
+            {
+              approvals.filter(
+                (a) =>
+                  a.to_be_approved_by === user.user_type &&
+                  a.status === "Approved"
+              ).length
+            }
+          </h2>
         </div>
         <div className="approvedbydiv">
           <p className="approvedbyp">Rejected by You</p>{" "}
-          <h2 className="approvedbyh2">8</h2>
+          <h2 className="approvedbyh2">
+            {
+              approvals.filter(
+                (a) =>
+                  a.to_be_approved_by === user.user_type &&
+                  a.status === "Rejected"
+              ).length
+            }
+          </h2>
         </div>
       </div>
       <div className="allApprovalHolder">
         {approvals.map((approval) => {
           return (
-            <>
+            <React.Fragment key={approval.approval_id}>
               <div
                 className="allApprovals"
                 // style={{display: approvalVisible? "block":"none"}}
@@ -79,8 +134,101 @@ const Approval = () => {
                   );
                 }}
               >
-                <h4>{approval.title}</h4>
-                <p>{approval.description}</p>
+                <div
+                  style={{
+                    display:
+                      visibleId === approval.approval_id ? "none" : "block",
+                  }}
+                >
+                  <div className="allApprovalsIconHolder">
+                    <div>
+                      <h4>{approval.title}</h4>
+                      <p
+                        style={{
+                          color:
+                            approval.status === "Pending"
+                              ? "rgb(136, 67, 3)"
+                              : approval.status === "Approved"
+                              ? "rgb(50, 116, 83)"
+                              : approval.status === "Rejected"
+                              ? "rgba(151, 43, 43, 1)"
+                              : approval.status === "In_progress"
+                              ? "rgba(89, 44, 119, 1)"
+                              : "black",
+                          backgroundColor:
+                            approval.status === "Pending"
+                              ? "rgb(243, 193, 146)"
+                              : approval.status === "Approved"
+                              ? "rgba(91, 206, 149, 1)"
+                              : approval.status === "Rejected"
+                              ? "rgba(221, 89, 89, 1)"
+                              : approval.status === "In_progress"
+                              ? "rgba(161, 84, 212, 1)"
+                              : "black",
+                        }}
+                        className="allApprovalsIconp"
+                      >
+                        {approval.status}
+                      </p>
+                    </div>
+
+                    <span>
+                      Approved by{" "}
+                      <strong>{approval.to_be_approved_by}</strong>
+                    </span>
+                    <Icon
+                      icon="mingcute:right-line"
+                      width="24"
+                      height="24"
+                      className="allApprovalsIcon"
+                    ></Icon>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display:
+                      visibleId === approval.approval_id ? "block" : "none",
+                  }}
+                >
+                  <div className="allApprovalsIconHolder">
+                    <div>
+                      <h4>{approval.title}</h4>
+                      <p
+                        style={{
+                          color:
+                            approval.status === "Pending"
+                              ? "rgb(136, 67, 3)"
+                              : approval.status === "Approved"
+                              ? "rgb(50, 116, 83)"
+                              : approval.status === "Rejected"
+                              ? "rgba(151, 43, 43, 1)"
+                              : approval.status === "In_progress"
+                              ? "rgba(89, 44, 119, 1)"
+                              : "black",
+                          backgroundColor:
+                            approval.status === "Pending"
+                              ? "rgb(243, 193, 146)"
+                              : approval.status === "Approved"
+                              ? "rgba(91, 206, 149, 1)"
+                              : approval.status === "Rejected"
+                              ? "rgba(221, 89, 89, 1)"
+                              : approval.status === "In_progress"
+                              ? "rgba(161, 84, 212, 1)"
+                              : "black",
+                        }}
+                        className="allApprovalsIconp"
+                      >
+                        {approval.status}
+                      </p>
+                    </div>
+                    <Icon
+                      icon="mingcute:down-line"
+                      width="24"
+                      height="24"
+                      className="allApprovalsIcon"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div
@@ -91,20 +239,42 @@ const Approval = () => {
                 }}
               >
                 <div className="approvalimage">
-                  <img src="" alt="approval Image" />
+                  <img
+                    src={`data:image/jpeg;base64,${approval.photo}`}
+                    alt="approval"
+                    className="approvalimg"
+                  />
                 </div>
-                <span className="singleRequestp4">Pending</span>
+                <span
+                  className="singleRequestp4"
+                  style={{
+                    color:
+                      approval.status === "Pending"
+                        ? "rgb(136, 67, 3)"
+                        : approval.status === "Approved"
+                        ? "rgb(50, 116, 83)"
+                        : approval.status === "Rejected"
+                        ? "rgba(151, 43, 43, 1)"
+                        : approval.status === "In_progress"
+                        ? "rgba(89, 44, 119, 1)"
+                        : "black",
+                    backgroundColor:
+                      approval.status === "Pending"
+                        ? "rgb(243, 193, 146)"
+                        : approval.status === "Approved"
+                        ? "rgba(91, 206, 149, 1)"
+                        : approval.status === "Rejected"
+                        ? "rgba(221, 89, 89, 1)"
+                        : approval.status === "In_progress"
+                        ? "rgba(161, 84, 212, 1)"
+                        : "black",
+                  }}
+                >
+                  {approval.status}
+                </span>
                 <div className="approvalDescription">
-                  <h2>Pothole Main Street</h2>
-                  <p className="approvalDescriptionp">
-                    Secondary road connecting main road (Nyanza-Bugesera) to the
-                    neighborhood econdary road connecting main road
-                    (Nyanza-Bugesera) to the neighborhood econdary road
-                    connecting main road (Nyanza-Bugesera) to the neighborhood
-                    econdary road connecting main road (Nyanza-Bugesera) to the
-                    neighborhood econdary road connecting main road
-                    (Nyanza-Bugesera) to the neighborhood
-                  </p>
+                  <h2>{approval.title}</h2>
+                  <p className="approvalDescriptionp">{approval.description}</p>
                   <h3>Status History</h3>
                   <div className="statusHistory">
                     <div>
@@ -118,7 +288,9 @@ const Approval = () => {
                       <h4 className="requestSubmittedath4">
                         Request Submitted
                       </h4>
-                      <p className="requestSubmittedatp">2024-10-26</p>
+                      <p className="requestSubmittedatp">
+                        {new Date(approval.created_at).toLocaleString()}
+                      </p>
                     </div>
                   </div>
                   <div className="statusHistory">
@@ -131,7 +303,9 @@ const Approval = () => {
                       />
                     </div>
                     <div className="statusHistory2">
-                      <h4 className="requestSubmittedath4">Waiting Approval</h4>
+                      <h4 className="requestSubmittedath4">
+                        {approval.status}
+                      </h4>
                       <p className="requestSubmittedatp">Current stage</p>
                     </div>
                   </div>
@@ -144,15 +318,40 @@ const Approval = () => {
                       className="note"
                       placeholder="Add a note"
                       rows={5}
+                      onChange={(e) => setNote(e.target.value)}
                     />
                   </div>
                   <div className="approvebtnsdiv">
-                    <button className="approveBTN">Approve</button>
-                    <button className="rejectBTN">Reject</button>
+                    <button
+                      className="approveBTN"
+                      onClick={() => {
+                        onApprove(
+                          approval.approval_id,
+                          approval.request_id,
+                          "Approved",
+                          note
+                        );
+                      }}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      className="rejectBTN"
+                      onClick={() => {
+                        onApprove(
+                          approval.approval_id,
+                          approval.request_id,
+                          "Rejected",
+                          note
+                        );
+                      }}
+                    >
+                      Reject
+                    </button>
                   </div>
                 </div>
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

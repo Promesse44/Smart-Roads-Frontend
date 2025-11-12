@@ -119,11 +119,27 @@
   background-color: rgb(50, 116, 83);
   border: solid grey 1px;
   border-radius: 10px;
-  width: 100%;
+  width: 80%;
   margin-top: 1rem;
   padding: 13px 1rem;
   font-size: 1rem;
   font-weight: 600;
+}
+
+.loginSpan{
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.loginSpan span{
+  margin-right: 5px;
+  font-weight: 500;
+  color: rgb(39, 39, 39); 
+}
+
+.loginSpanLink{
+  text-decoration: none;
+  color: rgb(50, 116, 83);
 }
 
 .loginBtn:hover{
@@ -346,8 +362,6 @@
 }
 
 .singleRequestp3{
-  background-color: rgb(243, 193, 146);
-  color: rgb(136, 67, 3);
   border-radius: 10px;
   margin-left: 1rem;
   padding: 2px 9px;
@@ -623,10 +637,32 @@
   margin: 0 6rem;
   background-color: white;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 5px 20px;
   line-height: 0;
   margin-bottom: 20px;
   /* width: 100%; */
+}
+
+.allApprovalsIconHolder{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.allApprovalsIconp{
+  border-radius: 10px;
+    /* margin-left: 1rem; */
+    padding: 10px 9px;
+    /* margin: 1rem 2rem; */
+}
+
+.allApprovalsIcon{
+  color: rgb(50, 116, 83);
+}
+
+.allApprovals:hover{
+  cursor: pointer;
+  border: solid 1px rgb(74, 170, 122);
 }
 
 .approvedbydivHOlder{
@@ -635,6 +671,11 @@
   margin-right: 6rem;
   margin-bottom: 2rem;
   justify-content: space-between;
+}
+
+.approvedbydiv:hover{
+  cursor: pointer;
+  border: solid 1px rgb(74, 170, 122);
 }
 
 .approvedbydiv{
@@ -653,6 +694,7 @@
 .approvedbyh2{
   padding-top: 10px;
   line-height: 0;
+  color: rgb(50, 116, 83);
 }
 
 .approvaldetails{
@@ -663,17 +705,35 @@
   box-shadow: 3px 3px 6px rgb(177, 177, 177);
 }
 
+
+/*  */
+/* 
+
+
+
+*/
+.approvaldetails:hover{
+  border: solid 1px rgb(74, 170, 122);
+}
+
 .approvalimage {
   width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 450px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.approvalimg{
+  width: 100%;
+  height: 100%;
   border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  height: 250px;
-  position: relative;
+  border-top-right-radius: 
+  10px;
 }
 
 .singleRequestp4 {
-  background-color: rgb(243, 193, 146);
-  color: rgb(136, 67, 3);
   border-radius: 10px;
   margin-left: 1rem;
   padding: 2px 9px;
