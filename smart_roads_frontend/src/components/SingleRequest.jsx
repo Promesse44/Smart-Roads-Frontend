@@ -38,6 +38,10 @@ const SingleRequest = () => {
     );
   }
 
+  const info = request.requestInfo;
+  const latest = request.latestApproval;
+  const previous = request.previousApproval;
+
   return (
     <>
       <div className="viewTitle">
@@ -62,41 +66,41 @@ const SingleRequest = () => {
       {/* <p className="path">All requests{'  > '} <strong>request.title</strong> </p> */}
       <div className="singleTitle">
         <div className="singleTitleH1Holer">
-          <h1 className="singleTitleH1">{request.title}</h1>
+          <h1 className="singleTitleH1">{info.title}</h1>
         </div>
         <p
           style={{
             color:
-              request.status === "Pending"
+              latest.status === "Pending"
                 ? "rgb(136, 67, 3)"
-                : request.status === "Approved"
+                : latest.status === "Approved"
                 ? "rgb(50, 116, 83)"
-                : request.status === "Rejected"
+                : latest.status === "Rejected"
                 ? "rgba(151, 43, 43, 1)"
-                : request.status === "In_progress"
+                : latest.status === "In_progress"
                 ? "rgba(89, 44, 119, 1)"
                 : "black",
             backgroundColor:
-              request.status === "Pending"
+              latest.status === "Pending"
                 ? "rgb(243, 193, 146)"
-                : request.status === "Approved"
+                : latest.status === "Approved"
                 ? "rgba(91, 206, 149, 1)"
-                : request.status === "Rejected"
+                : latest.status === "Rejected"
                 ? "rgba(221, 89, 89, 1)"
-                : request.status === "In_progress"
+                : latest.status === "In_progress"
                 ? "rgba(161, 84, 212, 1)"
                 : "black",
           }}
           className="singlerequestsIconp"
         >
-          {request.status}
+          {latest.status}
         </p>
       </div>
       <div className="singleDescription">
         <div className="singleDescriptionLeft">
           <div className="singleDescriptionLeftTop">
             <img
-              src={request.photo}
+              src={info.photo}
               alt="Request image"
               className="singleRequestimg"
             />
@@ -104,22 +108,42 @@ const SingleRequest = () => {
           <div className="singleDescriptionLeftBottom">
             <h4>Other Details</h4>
             <p className="locatinp1">
-              {request.status === "Approved" && Approved} by Local_leader :{" "}
-              <strong>{request.user_name}</strong>
+              {latest.status === "Pending" ? (
+                `Waiting for ${latest.approver_type}'s approval`
+              ) : (
+                <>
+                  {latest.status === "Approved"
+                    ? "Approved by "
+                    : latest.status === "Rejected"
+                    ? "Rejected by "
+                    : "Approved by "}
+                  {previous.approver_type} :{" "}
+                  <strong>{previous.approver_name}</strong>
+                </>
+              )}
             </p>
             <p className="locatinp1">
-              Note appended : <strong>{request.note}</strong>
+              Note appended :{" "}
+              {previous ? (
+                latest.status === "Pending" ? (
+                  <span>{previous.notes}</span>
+                ) : (
+                  <span>{latest.notes}</span>
+                )
+              ) : (
+                <span>{latest.notes}</span>
+              )}
             </p>
             <div className="locationpHOlder">
               <p className="locationp">
                 <Icon icon="bi:pin" width="16" height="16" />
-                <span>{request.address}</span>
+                <span>{info.address}</span>
               </p>
               <p></p>
             </div>
 
             <p className="locatinp2">
-              Submitted at {new Date(request.created_at).toLocaleString()}
+              Submitted at {new Date(info.created_at).toLocaleString()}
             </p>
           </div>
         </div>
@@ -128,20 +152,20 @@ const SingleRequest = () => {
             <h3>Submitted By</h3>
             <p className="singleRequestuserp">
               <Icon icon="mdi:user-outline" width="24" height="24" />
-              <span>{request.user_name}</span>
+              <span>{info.requester_name}</span>
             </p>
             <p className="singleRequestuserp">
               <Icon icon="ic:outline-email" width="24" height="24" />
-              <span>{request.email}</span>
+              <span>{info.requester_email}</span>
             </p>
             <p className="singleRequestuserp">
               <Icon icon="ic:outline-phone" width="24" height="24" />
-              <span>{request.phone_number}</span>
+              <span>{info.requester_phone}</span>
             </p>
           </div>
           <div className="singleDescriptionSubmittedBY1">
             <h3>Description</h3>
-            <p>{request.description}</p>
+            <p>{info.description}</p>
           </div>
         </div>
       </div>
