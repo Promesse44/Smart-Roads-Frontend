@@ -5,12 +5,16 @@ import { Link, useLocation } from "react-router-dom";
 const View = () => {
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState([]);
+
+  const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+
   // const location = useLocation();
 
   // const { user } = location.state;
 
   useEffect(() => {
+    setLoading(true);
     try {
       fetch("http://localhost:8000/request", {
         method: "GET",
@@ -23,9 +27,11 @@ const View = () => {
         .then((output) => {
           console.log("Fecthed requests: ", output);
           setRequests(output);
+          setLoading(false);
         });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }, []);
 
@@ -86,87 +92,70 @@ const View = () => {
 
       <div className="requestsContainer">
         <div className="singleRequestsHolder">
+          {loading && (
+            <div className="singleRequestsLoad">
+              <Icon
+                icon={"line-md:loading-twotone-loop"}
+                color="rgb(50, 116, 83)"
+                fontSize={100}
+              />
+            </div>
+          )}
           {requests.map((request) => (
-            <div className="singleRequest">
+            <div className="singleRequest" key={request.request_id}>
               <div className="mapImage">
-                <img
-                  src={`data:image/jpej;base64,${request.photo}`}
-                  alt="road"
-                />
+                <img src={request.photo} alt="road" />
               </div>
-              <div className="lowerSingleRequest">
+              <div className="requestDetailItem">
                 <h3 className="singleRequestTitle">{request.title}</h3>
                 <p className="singleRequestp1">
                   Submitted on: {new Date(request.created_at).toLocaleString()}{" "}
                   by {request.user_name}
                 </p>
-                <p className="singleRequestp2">{request.description}</p>
-                <span
-                  className="singleRequestp3"
-                  style={{
-                    color:
-                      request.status === "Pending"
-                        ? "rgb(136, 67, 3)"
-                        : request.status === "Approved"
-                        ? "rgb(50, 116, 83)"
-                        : request.status === "Rejected"
-                        ? "rgba(151, 43, 43, 1)"
-                        : request.status === "In_progress"
-                        ? "rgba(89, 44, 119, 1)"
-                        : "black",
-                    backgroundColor:
-                      request.status === "Pending"
-                        ? "rgb(243, 193, 146)"
-                        : request.status === "Approved"
-                        ? "rgba(91, 206, 149, 1)"
-                        : request.status === "Rejected"
-                        ? "rgba(221, 89, 89, 1)"
-                        : request.status === "In_progress"
-                        ? "rgba(161, 84, 212, 1)"
-                        : "black",
-                  }}
-                >
-                  {request.status}
-                </span>
+                <p className="singleRequestp2">
+                  {request.description.slice(0, 100)}
+                </p>
+                <div className="lowerSingleRequest">
+                  <span
+                    className="singleRequestp3"
+                    style={{
+                      color:
+                        request.status === "Pending"
+                          ? "rgb(136, 67, 3)"
+                          : request.status === "Approved"
+                          ? "rgb(50, 116, 83)"
+                          : request.status === "Rejected"
+                          ? "rgba(151, 43, 43, 1)"
+                          : request.status === "In_progress"
+                          ? "rgba(89, 44, 119, 1)"
+                          : "black",
+                      backgroundColor:
+                        request.status === "Pending"
+                          ? "rgb(243, 193, 146)"
+                          : request.status === "Approved"
+                          ? "rgba(91, 206, 149, 1)"
+                          : request.status === "Rejected"
+                          ? "rgba(221, 89, 89, 1)"
+                          : request.status === "In_progress"
+                          ? "rgba(161, 84, 212, 1)"
+                          : "black",
+                    }}
+                  >
+                    {request.status}
+                  </span>
+                  <button className="viewSinglebtn">
+                    <Link
+                      className="viewSinglebtnLink"
+                      to={`/view/${request.request_id}`}
+                    >
+                      View more
+                    </Link>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
-        {/* <div className="singleRequestsHolder">
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Karembure Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp3">Pending</span>
-            </div>
-          </div>
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Musanze Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp4">Approved</span>
-            </div>
-          </div>
-          <div className="singleRequest">
-            <img src="/images.jpeg" alt="street map" className="mapImage" />
-            <div className="lowerSingleRequest">
-              <h3 className="singleRequestTitle">Masaka Road</h3>
-              <p className="singleRequestp1">
-                Submitted on: Oct 26, 2023 by John
-              </p>
-              <p className="singleRequestp2">A large pothole on 63rd street</p>
-              <span className="singleRequestp5">Rejected</span>
-            </div>
-          </div>
-        </div> */}
       </div>
       <Link to={"/request"}>
         <button className="addRequestButton">

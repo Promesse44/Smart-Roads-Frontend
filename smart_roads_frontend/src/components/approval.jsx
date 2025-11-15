@@ -15,23 +15,29 @@ const Approval = () => {
   const [requestId, setRequestId] = useState(null);
   const [status, setStatus] = useState("");
   const [note, setNote] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const getApprovals = () => {
+    setLoading(true);
     fetch("http://localhost:8000/approvals", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
       .then((output) => {
         setApprovals(output);
+        setLoading(false);
       });
     return;
   };
 
-  useEffect(() => getApprovals, [token]);
+  useEffect(() => {
+    getApprovals();
+  }, [token]);
   // console.log(JSON.stringify(approvals, null, 2));
 
-  const onApprove = (approval_Id, requestId, status, note) => {
+  const onApprove = (approval_id, requestId, status, note) => {
     // e.preventDefault();
+    console.log(approval_id, requestId, status, note);
     fetch("http://localhost:8000/approve", {
       method: "POST",
       headers: {
@@ -39,7 +45,7 @@ const Approval = () => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        approvalId: approval_Id,
+        approvalId: approval_id,
         requestId,
         status,
         note,
@@ -61,7 +67,9 @@ const Approval = () => {
           <span className="leftViewTitleSpan">Smart Roads </span>
           <span className="spna">Admin Dashboard</span>
           <div>
-            <Link className="titleLink">All requests</Link>
+            <Link className="titleLink" to={"/view"}>
+              All requests
+            </Link>
           </div>
         </div>
         <div className="rightViewTitle1">
@@ -116,6 +124,15 @@ const Approval = () => {
           </h2>
         </div>
       </div>
+      {loading && (
+        <div className="singleRequestsLoad">
+          <Icon
+            icon={"line-md:loading-twotone-loop"}
+            color="rgb(50, 116, 83)"
+            fontSize={100}
+          />
+        </div>
+      )}
       <div className="allApprovalHolder">
         {approvals.map((approval) => {
           return (
@@ -173,8 +190,7 @@ const Approval = () => {
                     </div>
 
                     <span>
-                      Approved by{" "}
-                      <strong>{approval.to_be_approved_by}</strong>
+                      Approved by <strong>{approval.to_be_approved_by}</strong>
                     </span>
                     <Icon
                       icon="mingcute:right-line"
@@ -240,7 +256,7 @@ const Approval = () => {
               >
                 <div className="approvalimage">
                   <img
-                    src={`data:image/jpeg;base64,${approval.photo}`}
+                    src={approval.photo}
                     alt="approval"
                     className="approvalimg"
                   />
@@ -325,12 +341,19 @@ const Approval = () => {
                     <button
                       className="approveBTN"
                       onClick={() => {
-                        onApprove(
-                          approval.approval_id,
-                          approval.request_id,
-                          "Approved",
-                          note
-                        );
+                        user.user_type !== "Architect"
+                          ? onApprove(
+                              approval.approval_id,
+                              approval.request_id,
+                              "Approved",
+                              note
+                            )
+                          : onApprove(
+                              approval.approval_id,
+                              approval.request_id,
+                              "In_progress",
+                              note
+                            );
                       }}
                     >
                       Approve

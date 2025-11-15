@@ -181,6 +181,7 @@
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .leftViewTitle{
@@ -283,6 +284,17 @@
   color: rgb(17, 163, 90);
 }
 
+
+.singleRequestsLoad{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 3rem;
+}
+
+
+
 .filterButton1{
   margin-left: 15px;
   border-radius: 10px;
@@ -345,6 +357,30 @@
   border-top-right-radius: 10px;
 }
 
+.lowerSingleRequest{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1rem;
+  align-items: center;
+}
+
+.viewSinglebtn{
+  border-radius: 50px;
+  border: none;
+  padding: 7px 18px;
+  background-color: rgb(50, 116, 83);
+}
+
+.viewSinglebtn:hover{
+  cursor: pointer;
+    background-color: rgb(17, 163, 90)
+}
+
+.viewSinglebtnLink{
+  text-decoration: none;
+  color: white;
+}
+
 
 .singleRequestTitle{
   padding-left: 1rem;
@@ -358,13 +394,15 @@
 .singleRequestp2{
   line-height: 1;
   padding-left: 1rem;
+  padding-right: 1rem;
   color: grey;
+  height: 50px;
 }
 
 .singleRequestp3{
-  border-radius: 10px;
+  border-radius: 50px;
   margin-left: 1rem;
-  padding: 2px 9px;
+  padding: 5px 9px;
 }
 
 .singleRequestp4{
@@ -468,7 +506,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20rem;
+  height: 30rem;
   position: relative;
 }
 
@@ -729,8 +767,7 @@
   width: 100%;
   height: 100%;
   border-top-left-radius: 10px;
-  border-top-right-radius: 
-  10px;
+  border-top-right-radius: 10px;
 }
 
 .singleRequestp4 {
@@ -824,8 +861,173 @@
   background-color: rgb(219, 54, 54);
 }
 
+.RequestButtonLink{
+  text-decoration: none;
+  margin-right: 1rem;
+}
 
 
+.RequestButton {
+  display: flex;
+  align-items: center;
+  background-color: rgb(50, 116, 83);
+  border: none;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 50px;
+}
+
+.RequestButton:hover {
+  cursor: pointer;
+  background-color: rgb(17, 163, 90)
+}
+
+.RequestButton span {
+  padding-left: 2px;
+}
+
+.rightViewTitle12 {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+
+.path{
+  margin: 2rem 3rem;
+}
+
+.singleTitle{
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 2rem;
+  align-items: center;
+}
+
+
+.singleApprovalsIconp {
+  border-radius: 10px;
+  padding: 10px 9px;
+  /* height: 15px; */
+  display: flex;
+  align-items: center;
+  padding: 2px 15px;
+}
+
+.singleTitleH1Holer{
+  padding: 1.5rem 0;
+}
+
+.singleTitleH1{
+  line-height: 0;
+  font-size: 3rem;
+}
+
+.singleDescription{
+  margin: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 3rem;
+}
+
+.singleDescriptionLeft{
+  width: 64%;
+    border-radius: 10px;
+    position: relative;
+}
+
+.singleDescriptionLeftTop{
+  background-color: bisque;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 6px rgb(177, 177, 177);
+}
+
+.singleDescriptionLeftBottom{
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 2rem;
+  padding-top: 1px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  box-shadow: 3px 3px 6px rgb(177, 177, 177);
+}
+
+.locationpHOlder{
+  display: flex;
+  justify-content: space-between;
+  line-height: 0;
+}
+
+.locatinp1{
+  margin-top: 40px;
+  line-height: 0;
+}
+
+.locationp{
+  display: flex;
+  align-items: center;
+  background-color: rgb(228, 228, 228);
+  padding: 5px 15px;
+  border-radius: 50px;
+}
+
+.locationp span{
+  margin-left: 10px;
+}
+
+.locatinp2{
+  line-height: 0;
+}
+
+.singleDescriptionRight{
+  width: 33%;
+  /* display: flexbox; */
+}
+
+.singleDescriptionSubmittedBY{
+  background-color: white;
+  border-radius: 10px;
+  /* width: 100%; */
+  height: 12rem;
+  padding: 1px 30px;
+  box-shadow: 6px 5px 6px rgb(177, 177, 177);
+}
+
+.singleRequestuserp{
+  display: flex;
+  align-items: center;
+}
+
+.singleRequestuserp span{
+  margin-left: 15px;
+}
+
+.singlerequestsIconp{
+  border-radius: 50px;
+    margin-left: 1rem;
+    padding: 2px 9px;
+}
+
+.singleDescriptionSubmittedBY1{
+  background-color: white;
+    border-radius: 10px;
+    /* width: 100%; */
+    margin-top: 2rem;
+    padding: 1px 30px;
+    box-shadow: 6px 5px 6px rgb(177, 177, 177);
+}
+
+.singleRequestimg {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+
+.requestDetailsItem{
+  position: relative;
+}
 
 
 

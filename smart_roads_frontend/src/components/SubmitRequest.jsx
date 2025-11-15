@@ -54,7 +54,7 @@ const SubmitRequest = () => {
     formData.append("photo", selectedFile);
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("adress", address);
+    formData.append("address", address);
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
 
