@@ -19,7 +19,7 @@ const SingleRequest = () => {
     })
       .then((res) => res.json())
       .then((output) => {
-        console.log(output);
+        console.log("Single request:", output);
         setRequest(output);
         setLoading(false);
       })
@@ -38,9 +38,30 @@ const SingleRequest = () => {
     );
   }
 
+  // Destructure from backend response
   const info = request.requestInfo;
   const latest = request.latestApproval;
-  const previous = request.previousApproval;
+  const previous = request.previousApproval || null;
+
+  // If latest is from Architect, DISPLAY latest (your updated logic)
+  const usedStatus = latest || previous;
+
+  // Determine status text color & background
+  const statusColor =
+    {
+      Pending: "rgb(136, 67, 3)",
+      Approved: "rgb(50, 116, 83)",
+      Rejected: "rgba(151, 43, 43, 1)",
+      In_progress: "rgba(89, 44, 119, 1)",
+    }[usedStatus.status] || "white";
+
+  const statusBg =
+    {
+      Pending: "rgb(243, 193, 146)",
+      Approved: "rgba(91, 206, 149, 1)",
+      Rejected: "rgba(221, 89, 89, 1)",
+      In_progress: "rgba(161, 84, 212, 1)",
+    }[usedStatus.status] || "black";
 
   return (
     <>
@@ -63,83 +84,60 @@ const SingleRequest = () => {
           <button className="viewProfile1"></button>
         </div>
       </div>
-      {/* <p className="path">All requests{'  > '} <strong>request.title</strong> </p> */}
+
       <div className="singleTitle">
         <div className="singleTitleH1Holer">
           <h1 className="singleTitleH1">{info.title}</h1>
         </div>
+
         <p
-          style={{
-            color:
-              latest.status === "Pending"
-                ? "rgb(136, 67, 3)"
-                : latest.status === "Approved"
-                ? "rgb(50, 116, 83)"
-                : latest.status === "Rejected"
-                ? "rgba(151, 43, 43, 1)"
-                : latest.status === "In_progress"
-                ? "rgba(89, 44, 119, 1)"
-                : "black",
-            backgroundColor:
-              latest.status === "Pending"
-                ? "rgb(243, 193, 146)"
-                : latest.status === "Approved"
-                ? "rgba(91, 206, 149, 1)"
-                : latest.status === "Rejected"
-                ? "rgba(221, 89, 89, 1)"
-                : latest.status === "In_progress"
-                ? "rgba(161, 84, 212, 1)"
-                : "black",
-          }}
           className="singlerequestsIconp"
+          style={{ color: statusColor, backgroundColor: statusBg }}
         >
-          {latest.status}
+          {usedStatus.status}
         </p>
       </div>
+
       <div className="singleDescription">
         <div className="singleDescriptionLeft">
           <div className="singleDescriptionLeftTop">
-            <img
-              src={info.photo}
-              alt="Request image"
-              className="singleRequestimg"
-            />
+            <img src={info.photo} alt="Request" className="singleRequestimg" />
           </div>
+
           <div className="singleDescriptionLeftBottom">
             <h4>Other Details</h4>
+
+            {/* STATUS MESSAGE */}
             <p className="locatinp1">
-              {latest.status === "Pending" ? (
+              {usedStatus.status === "Pending" ? (
                 `Waiting for ${latest.approver_type}'s approval`
               ) : (
                 <>
-                  {latest.status === "Approved"
+                  {usedStatus.status === "Approved"
                     ? "Approved by "
-                    : latest.status === "Rejected"
+                    : usedStatus.status === "Rejected"
                     ? "Rejected by "
-                    : "Approved by "}
-                  {previous.approver_type} :{" "}
-                  <strong>{previous.approver_name}</strong>
+                    : "Updated by "}
+                  {usedStatus.approver_type} :{" "}
+                  <strong>{usedStatus.approver_name}</strong>
                 </>
               )}
             </p>
+
+            {/* NOTES */}
             <p className="locatinp1">
-              Note appended :{" "}
-              {previous ? (
-                latest.status === "Pending" ? (
-                  <span>{previous.notes}</span>
-                ) : (
-                  <span>{latest.notes}</span>
-                )
-              ) : (
-                <span>{latest.notes}</span>
-              )}
+              Note appended:{" "}
+              <span>
+                {usedStatus.notes ? usedStatus.notes : "No notes added"}
+              </span>
             </p>
+
+            {/* LOCATION */}
             <div className="locationpHOlder">
               <p className="locationp">
                 <Icon icon="bi:pin" width="16" height="16" />
                 <span>{info.address}</span>
               </p>
-              <p></p>
             </div>
 
             <p className="locatinp2">
@@ -147,22 +145,28 @@ const SingleRequest = () => {
             </p>
           </div>
         </div>
+
+        {/* RIGHT SIDE */}
         <div className="singleDescriptionRight">
           <div className="singleDescriptionSubmittedBY">
             <h3>Submitted By</h3>
+
             <p className="singleRequestuserp">
               <Icon icon="mdi:user-outline" width="24" height="24" />
               <span>{info.requester_name}</span>
             </p>
+
             <p className="singleRequestuserp">
               <Icon icon="ic:outline-email" width="24" height="24" />
               <span>{info.requester_email}</span>
             </p>
+
             <p className="singleRequestuserp">
               <Icon icon="ic:outline-phone" width="24" height="24" />
               <span>{info.requester_phone}</span>
             </p>
           </div>
+
           <div className="singleDescriptionSubmittedBY1">
             <h3>Description</h3>
             <p>{info.description}</p>

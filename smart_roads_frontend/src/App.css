@@ -249,6 +249,61 @@
   left: 2.5rem;
 }
 
+.userNavigationHolder{
+  background-color: white;
+  border: solid .5px rgb(206, 206, 206);
+  border-radius: 10px;
+  padding: 20px 2rem;
+  position: fixed;
+  margin-top: 10px;
+  right: 3.5rem;
+  z-index: 1000;
+  width: 10rem;
+}
+
+.userNavigation{
+  text-align: center;
+  width: 100%;
+  line-height:0;
+}
+
+.userNavigationemail{
+  padding-top: 5px;
+}
+
+.userNavigation .rightViewTitleUserName1 {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(226, 226, 226);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.logout{
+  background-color: rgb(223, 96, 96);
+  color: rgb(112, 30, 30);
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: 30px;
+}
+
+
+
+
+.rightViewTitleUserName1 {
+  height: 45px;
+  width: 45px;
+  background-color: rgb(218, 92, 201);
+  border-radius: 50%;
+  border: none;
+}
+
+.userNavigationp1{
+  font-weight: 30px;
+}
+
 .searchRequestsInput{
   background-color: white;
   color: black;
@@ -334,6 +389,11 @@
   padding-bottom: 20px;
   line-height: 1;
   margin: 20px;
+}
+
+.singleRequest:hover{
+  box-shadow: 5px 5px 10px rgb(187, 187, 187);
+  border: solid .1px rgb(187, 187, 187);
 }
 
 .mapImage{

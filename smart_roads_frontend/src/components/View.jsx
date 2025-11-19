@@ -53,6 +53,16 @@ const View = () => {
           </div>
         </div>
       </div>
+      <div className="userNavigationHolder">
+        <div className="userNavigation">
+          <div className="rightViewTitleUserName1"></div>
+          <h4 className="userNavigationh1">{user.user_name}</h4>
+          <p className="userNavigationemail">{user.email}</p>
+          <p className="userNavigationemail">{user.phone_number}</p>
+          <p className="userNavigationemail">{user.user_type}</p>
+          <button className="logout">Logout</button>
+        </div>
+      </div>
       <h1 className="viewh1">All Road Requests</h1>
       <div className="searchRequestsDiv">
         <div className="searchIconDiv">
@@ -101,60 +111,67 @@ const View = () => {
               />
             </div>
           )}
-          {requests.map((request) => (
-            <div className="singleRequest" key={request.request_id}>
-              <div className="mapImage">
-                <img src={request.photo} alt="road" />
-              </div>
-              <div className="requestDetailItem">
-                <h3 className="singleRequestTitle">{request.title}</h3>
-                <p className="singleRequestp1">
-                  Submitted on: {new Date(request.created_at).toLocaleString()}{" "}
-                  by {request.user_name}
-                </p>
-                <p className="singleRequestp2">
-                  {request.description.slice(0, 100)}
-                </p>
-                <div className="lowerSingleRequest">
-                  <span
-                    className="singleRequestp3"
-                    style={{
-                      color:
-                        request.status === "Pending"
-                          ? "rgb(136, 67, 3)"
-                          : request.status === "Approved"
-                          ? "rgb(50, 116, 83)"
-                          : request.status === "Rejected"
-                          ? "rgba(151, 43, 43, 1)"
-                          : request.status === "In_progress"
-                          ? "rgba(89, 44, 119, 1)"
-                          : "black",
-                      backgroundColor:
-                        request.status === "Pending"
-                          ? "rgb(243, 193, 146)"
-                          : request.status === "Approved"
-                          ? "rgba(91, 206, 149, 1)"
-                          : request.status === "Rejected"
-                          ? "rgba(221, 89, 89, 1)"
-                          : request.status === "In_progress"
-                          ? "rgba(161, 84, 212, 1)"
-                          : "black",
-                    }}
-                  >
-                    {request.status}
-                  </span>
-                  <button className="viewSinglebtn">
-                    <Link
-                      className="viewSinglebtnLink"
-                      to={`/view/${request.request_id}`}
+          {requests.map((request) => {
+            const latest = request.latest_approval;
+            const previous = request.previous_approval;
+            const usedStatus = latest;
+
+            return (
+              <div className="singleRequest" key={request.request_id}>
+                <div className="mapImage">
+                  <img src={request.photo} alt="road" />
+                </div>
+                <div className="requestDetailItem">
+                  <h3 className="singleRequestTitle">{request.title}</h3>
+                  <p className="singleRequestp1">
+                    Submitted on:{" "}
+                    {new Date(request.created_at).toLocaleString()} by{" "}
+                    {request.user_name}
+                  </p>
+                  <p className="singleRequestp2">
+                    {request.description.slice(0, 100)}
+                  </p>
+                  <div className="lowerSingleRequest">
+                    <span
+                      className="singleRequestp3"
+                      style={{
+                        color:
+                          usedStatus.status === "Pending"
+                            ? "rgb(136, 67, 3)"
+                            : usedStatus.status === "Approved"
+                            ? "rgb(50, 116, 83)"
+                            : usedStatus.status === "Rejected"
+                            ? "rgba(151, 43, 43, 1)"
+                            : usedStatus.status === "In_progress"
+                            ? "rgba(89, 44, 119, 1)"
+                            : "black",
+                        backgroundColor:
+                          usedStatus.status === "Pending"
+                            ? "rgb(243, 193, 146)"
+                            : usedStatus.status === "Approved"
+                            ? "rgba(91, 206, 149, 1)"
+                            : usedStatus.status === "Rejected"
+                            ? "rgba(221, 89, 89, 1)"
+                            : usedStatus.status === "In_progress"
+                            ? "rgba(161, 84, 212, 1)"
+                            : "black",
+                      }}
                     >
-                      View more
-                    </Link>
-                  </button>
+                      {usedStatus.status}
+                    </span>
+                    <button className="viewSinglebtn">
+                      <Link
+                        className="viewSinglebtnLink"
+                        to={`/view/${request.request_id}`}
+                      >
+                        View more
+                      </Link>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       <Link to={"/request"}>

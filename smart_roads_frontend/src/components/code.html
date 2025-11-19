@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Community Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0E9F6E",
+            "secondary": "#F5F7FA",
+            "accent": "#FFD166",
+            "background-light": "#F5F7FA",
+            "background-dark": "#10221c",
+            "heading": "#111827",
+            "body": "#4B5563",
+          },
+          fontFamily: {
+            "display": ["Montserrat", "sans-serif"],
+            "sans": ["Open Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px",
+          },
+        },
+      },
+    }
+  </script>
+<style type="text/tailwindcss">
+    body {
+        @apply font-sans;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display;
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="bg-white dark:bg-background-dark dark:border-b dark:border-gray-700 w-full sticky top-0 z-10 shadow-sm">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between whitespace-nowrap py-4">
+<div class="flex items-center gap-4 text-heading dark:text-gray-200">
+<div class="text-primary size-7">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Community Dashboard</h2>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative flex cursor-pointer items-center justify-center text-body dark:text-gray-400 hover:text-heading dark:hover:text-gray-200 transition-colors">
+<span class="material-symbols-outlined text-2xl">notifications</span>
+<div class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-xs font-bold text-heading">2</div>
+</button>
+<div class="relative group">
+<button class="flex items-center gap-3 cursor-pointer">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar of Jane Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAy8lQ-4gsByPKPRPAXcaunKDm-DMPoj5QxRL8orZTmClkhtW6evRMIicuOaN1w2AhMlSmcmwf6FyZbulx4mobaCnnvjM2JYSXSvG9wYRToxJneGN6HRv5R8PpJnnLsyHCgHzPs2eNoOJZvU1VMoaOjWV0NE7CCo8YQsnI66rSUHdQgYqy7j27tpZteDZrK5Yr1Nk2jLiEwyji8SaHlkiwUSnO2Y1oYWQR0Qr5teCtCOThrF7LvB0aDhLNHVYVwG0IkzS-KY0OMpAKA");'></div>
+<p class="text-sm font-semibold text-heading dark:text-gray-200 hidden sm:block">Jane Doe</p>
+</button>
+<div class="absolute right-0 top-full mt-2 w-72 origin-top-right rounded-xl bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-opacity duration-200">
+<div class="flex flex-col items-center p-6 text-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-16 mb-4" data-alt="Avatar of Jane Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAy8lQ-4gsByPKPRPAXcaunKDm-DMPoj5QxRL8orZTmClkhtW6evRMIicuOaN1w2AhMlSmcmwf6FyZbulx4mobaCnnvjM2JYSXSvG9wYRToxJneGN6HRv5R8PpJnnLsyHCgHzPs2eNoOJZvU1VMoaOjWV0NE7CCo8YQsnI66rSUHdQgYqy7j27tpZteDZrK5Yr1Nk2jLiEwyji8SaHlkiwUSnO2Y1oYWQR0Qr5teCtCOThrF7LvB0aDhLNHVYVwG0IkzS-KY0OMpAKA");'></div>
+<p class="text-lg font-bold text-heading dark:text-gray-100">Jane Doe</p>
+<p class="text-sm text-body dark:text-gray-400">jane.doe@example.com</p>
+</div>
+<div class="border-t border-gray-200 dark:border-gray-700 p-2">
+<a class="block w-full text-left px-4 py-2 text-sm text-body dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md" href="#">Manage Account</a>
+<a class="block w-full text-left px-4 py-2 text-sm text-body dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md" href="#">Logout</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h1 class="text-heading dark:text-gray-100 text-3xl font-bold leading-tight tracking-tighter">Neighborhood Road Requests</h1>
+</div>
+<div class="flex flex-col md:flex-row gap-4 items-center">
+<div class="w-full md:flex-1">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm bg-white dark:bg-background-dark dark:border dark:border-gray-700">
+<div class="text-body dark:text-gray-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-heading dark:text-gray-200 focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-body dark:placeholder:text-gray-500 px-4 pl-2 text-base font-normal leading-normal" placeholder="Search requests by title or keywords" value=""/>
+</div>
+</label>
+</div>
+<div class="flex gap-2 self-start md:self-center">
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-background-dark dark:border dark:border-gray-700 shadow-sm px-4">
+<p class="text-body dark:text-gray-300 text-sm font-semibold leading-normal">Status</p>
+<span class="material-symbols-outlined text-body dark:text-gray-400 text-xl">expand_more</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-background-dark dark:border dark:border-gray-700 shadow-sm px-4">
+<p class="text-body dark:text-gray-300 text-sm font-semibold leading-normal">Date</p>
+<span class="material-symbols-outlined text-body dark:text-gray-400 text-xl">expand_more</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of pothole on Elm Street" data-location="Elm Street" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUETsbs3YAoa0JDr5QmJzQKEy6StZDaBM6G3LyFSEbjI1kOcZac_994nFnCJ8dnhjQ-teBoJ-Um_CVrELhbBZvlBR2C-IkfuuDhYTAocor1yo7HgRC8oiBuNFqkJCh4GcIzC6jKY2O9mOuuuZT6LVGw4kSX3Im1jbpRE8GtMokkhZKU_Fav9GkQLCSn44UuuY87dkXcxi1FcAJKx7wEmnpang-xrUGudKP_w63l2eEZDaKvMt2sA27i4Qi2359WbMKKccsZRcjCtyQ");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">Pothole Repair on Elm Street</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 26, 2023 by John S.</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">A large pothole is causing issues for traffic near the corner of Elm and Maple.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-yellow-100 dark:bg-yellow-900/50 px-3 py-1 text-xs font-semibold text-yellow-800 dark:text-yellow-300">In Review</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of cracked sidewalk on Oak Avenue" data-location="Oak Avenue" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKe4qHW7NDroKKK5PGrJPWuQAwu5JdhSMKWDIRDbfOd159jxNwoX1CGvn6xaqxgPrAli0tbZDt3thqlZE6TddCCp1cGneaF044ATPxoZfx8oqgYuSXXgewcv2KtHaCg5gpV3_tpwdqFkKBU1AEoXJXm1jNgE7eMWGxo6iZOTGCJbw-Q9Xv8jK0Ack4O645LZGWmo0gV3O5ymX-SRDAxOPJ5sfY7ci9jbQvOXVOqH_x2YzJ38aRIoS7iMcGtLICTSTFpDxOV7QGVSxz");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">Cracked Sidewalk on Oak Avenue</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 24, 2023 by Maria G.</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">The sidewalk has large cracks and is a tripping hazard for pedestrians.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-3 py-1 text-xs font-semibold text-green-800 dark:text-green-300">Approved</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of new crosswalk request at Pine &amp; 1st" data-location="Pine &amp; 1st" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-ci2UjH9QVVEHyyCVdYEn1AgN2wZoTpZYEeZcXEYH-o192ha7StqfFvy0nB1UvQkSaj7CQZRwy73YmeQt369gtjlzM6FJ1rvs2bqor8h4T6e1YtHizEdqrrJlOmmTBEsf65KJ6aaFWeFAOiL8asQfU5h2I0oE7oZBP-PMZuZZO5CtrzhbHkR2TMYmY65Kp0m7OlkH1bKWjEowB9CFCXvZ-kg9eVN4HZLOEbSzl1EvFzsChr51bVX5fwzGrjJqTKivOYkXgiHE-6sS");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">New Crosswalk at Pine &amp; 1st</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 22, 2023 by City Council</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">Request for a new painted crosswalk to improve pedestrian safety.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-gray-200 dark:bg-gray-700 px-3 py-1 text-xs font-semibold text-gray-800 dark:text-gray-300">Completed</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of faded lane markings on Central Blvd" data-location="Central Blvd" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAhGq7ZD4qLSn3jAaXRz5Lo0g3iKpdnvjzv5LWwoWFb82xtSGiNe0t0sOAoU_TsNhgk_p4Th-5DlPqmGU_dKwdaAmIZJwCR83Dj4d5iu28mG6nY6sAJhFh3xGBoPIG4rPEpdczw8Oa-BOwTiPlVW4ZYFCtyX3ZmQnFTM9f4FwVKi5brYsUL0w7B4oDkT-YwNsOcjzPpBMlblQ3bGTpPW1yUJt9Wqd7t0sDSxAj2CMynIt5Fe5ieIT4X3C_xZrQj60dm5ObBgPzuxo-T");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">Faded Lane Markings on Central Blvd</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 21, 2023 by Alex T.</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">The lines on the main boulevard are barely visible, especially at night.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/50 px-3 py-1 text-xs font-semibold text-blue-800 dark:text-blue-300">Pending</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of streetlight outage on Willow Creek Drive" data-location="Willow Creek Drive" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzSvuh-REvGaYuaJb_NL4NGo_dHUsqxuGDr6i6n2dzz70iU8HttUpcU2Fgr-yCWgQzcOd-fCGNBVsJHhTlmXyZtGcto3iA1cmp1l3NV2qVVUWUNQkXWeWy33fIEpqg6PXIqX9bN7uTtGAkWD58ElfI2BvxRRfBKe3IWdVQRbltYimP2nqysEPEyAjWFFZsm62dlfZ8eQV4Weozv6cGAyGbcBE9GQa6Kuwm3rxHJ5NBj9lFnhkA9SPrryIkOHKnWc9N8vU8TuMQACq0");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">Streetlight Outage on Willow Creek</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 19, 2023 by Emily R.</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">Multiple streetlights are out, making the street very dark and unsafe.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900/50 px-3 py-1 text-xs font-semibold text-green-800 dark:text-green-300">Approved</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-stretch justify-start rounded-xl bg-white dark:bg-gray-900/50 dark:border dark:border-gray-800 shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[5/3] bg-cover rounded-t-xl" data-alt="Map showing location of blocked drainage on River Road" data-location="River Road" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSKPMqxiqBgcFo_WbBk3DD5WGH7i1UrEtl1GFmSg7jpdiKmrtll9R0bnDUuWzLY8VgeX949C4Tvs1i2FzNF9IuxU8ebCGzzU331dLK8vTZAs4KgedpbhoiNGBQ47SAdLAr0065a44AmaPyAF6v7-VYLjAFWKxHK4p2vDMm393bdhP2i6mJ2d9IXSasqXSCz_ehN1pmIIjZA1Ix3gkRqVFAPohjpNsh7Hx_PdTHjim5PgSgxCH6EvHm5evQfMai2459rBTaboRFAvbu");'></div>
+<div class="flex w-full grow flex-col items-stretch justify-start gap-3 p-5">
+<h3 class="text-heading dark:text-gray-100 text-lg font-bold leading-tight">Blocked Drainage on River Road</h3>
+<div class="flex flex-col gap-1">
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal">Submitted on: Oct 18, 2023 by David L.</p>
+<p class="text-body dark:text-gray-400 text-sm font-normal leading-normal truncate">The storm drain is clogged, causing flooding during rain.</p>
+</div>
+<div class="mt-2">
+<span class="inline-flex items-center rounded-full bg-red-100 dark:bg-red-900/50 px-3 py-1 text-xs font-semibold text-red-800 dark:text-red-300">Rejected</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<button class="fixed bottom-8 right-8 flex h-14 cursor-pointer items-center justify-center gap-3 overflow-hidden rounded-full bg-primary pl-5 pr-6 text-white shadow-lg transition-all hover:bg-primary/90">
+<span class="material-symbols-outlined text-2xl">add</span>
+<span class="text-base font-semibold leading-normal">New Road Request</span>
+</button>
+</div>
+
+</body></html>
