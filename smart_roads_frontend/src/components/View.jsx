@@ -11,6 +11,7 @@ const View = () => {
   const [showUser, setShowUser] = useState(false);
   const userBtnRef = React.useRef(null);
   const userNavRef = React.useRef(null);
+  const [usedStatus, setUsedStatus] = useState(null);
 
   // const location = useLocation();
 
@@ -151,9 +152,16 @@ const View = () => {
           )}
           {requests.map((request) => {
             const latest = request.latest_approval;
-            const previous = request.previous_approval;
-            const usedStatus = latest;
-
+            const previous = request.previous_approval || null;
+            const usedStatus =
+              latest?.status === "In_progress"
+                ? latest
+                : latest?.approver_type === "Government"
+                ? latest
+                : latest?.approver_type === "Local_leader" &&
+                  latest?.status === "Pending"
+                ? latest
+                : previous;
             return (
               <div className="singleRequest" key={request.request_id}>
                 <div className="mapImage">

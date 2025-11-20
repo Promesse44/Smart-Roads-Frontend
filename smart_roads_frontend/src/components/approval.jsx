@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Approval = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   // const location = useLocation();
   // const { user } = location.state;
+
   const user = JSON.parse(localStorage.getItem("user"));
   const [approvals, setApprovals] = useState([]);
   const [visibleId, setVisibleId] = useState(null);
@@ -16,9 +18,13 @@ const Approval = () => {
   const [status, setStatus] = useState("");
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
-    const [showUser, setShowUser] = useState(false);
-    const userBtnRef = React.useRef(null);
-    const userNavRef = React.useRef(null);
+  const [showUser, setShowUser] = useState(false);
+  const userBtnRef = React.useRef(null);
+  const userNavRef = React.useRef(null);
+  //   if (!user) {
+  //   navigate("/");
+  //   return null;
+  // }
 
   const getApprovals = () => {
     setLoading(true);
@@ -69,22 +75,22 @@ const Approval = () => {
   };
 
   useEffect(() => {
-      function handleClickOutside(event) {
-        if (
-          userNavRef.current &&
-          !userNavRef.current.contains(event.target) &&
-          userBtnRef.current &&
-          !userBtnRef.current.contains(event.target)
-        ) {
-          setShowUser(false);
-        }
+    function handleClickOutside(event) {
+      if (
+        userNavRef.current &&
+        !userNavRef.current.contains(event.target) &&
+        userBtnRef.current &&
+        !userBtnRef.current.contains(event.target)
+      ) {
+        setShowUser(false);
       }
-  
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -115,6 +121,8 @@ const Approval = () => {
           </div>
         </div>
       </div>
+
+      {showUser && <div className="pageOverlay"></div>}
       <div
         ref={userNavRef}
         className="userNavigationHolder"
@@ -236,7 +244,13 @@ const Approval = () => {
                     </div>
 
                     <span>
-                      {approval.status === "Approved" ? "Approved" : "Rejected"}{" "}
+                      {approval.status === "Approved"
+                        ? "Approved"
+                        : approval.status === "In_progress"
+                        ? "Approved"
+                        : approval.status === "Rejected"
+                        ? "Rejected"
+                        : "Wainting to be approved"}{" "}
                       by <strong>{approval.to_be_approved_by}</strong>
                     </span>
                     <Icon

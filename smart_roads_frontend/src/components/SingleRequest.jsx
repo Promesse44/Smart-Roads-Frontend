@@ -70,8 +70,19 @@ const SingleRequest = () => {
   const latest = request.latestApproval;
   const previous = request.previousApproval || null;
 
-  // If latest is from Architect, DISPLAY latest (your updated logic)
-  const usedStatus = latest || previous;
+  // const usedStatus = latest || previous;
+  let usedStatus;
+
+
+  if (!previous) {
+    usedStatus = latest;
+  } else {
+    if (latest.status === "Pending") {
+      usedStatus = previous;
+    } else {
+      usedStatus = latest;
+    }
+  }
 
   // Determine status text color & background
   const statusColor =
@@ -164,11 +175,12 @@ const SingleRequest = () => {
 
             {/* STATUS MESSAGE */}
             <p className="locatinp1">
-              {usedStatus.status === "Pending" ? (
+              {usedStatus.status === "Pending" &&
+              usedStatus.approver_type === "Local_leader" ? (
                 `Waiting for ${latest.approver_type}'s approval`
               ) : (
                 <>
-                  {usedStatus.status === "Approved"
+                  {usedStatus.status === "Approved" && usedStatus.approver_type === "Government"
                     ? "Approved by "
                     : usedStatus.status === "Rejected"
                     ? "Rejected by "
