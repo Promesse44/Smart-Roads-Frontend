@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const View = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
+  const [showUser, setShowUser] = useState(false);
+  const userBtnRef = React.useRef(null);
+  const userNavRef = React.useRef(null);
 
   // const location = useLocation();
 
@@ -35,6 +38,30 @@ const View = () => {
     }
   }, []);
 
+  const onLougout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        userNavRef.current &&
+        !userNavRef.current.contains(event.target) &&
+        userBtnRef.current &&
+        !userBtnRef.current.contains(event.target)
+      ) {
+        setShowUser(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="viewTitle">
@@ -46,21 +73,32 @@ const View = () => {
             <Icon icon="iconamoon:notification" width="20" height="20" />
           </div>
           <div className="rightViewTitleUserName">
-            <button className="viewProfile"></button>
+            <button
+              ref={userBtnRef}
+              className="viewProfile"
+              onClick={() => setShowUser((prev) => !prev)}
+            ></button>
           </div>
           <div className="rightViewTitleUserName2">
             <span className="rightViewTitleSpan">{user.user_name}</span>
           </div>
         </div>
       </div>
-      <div className="userNavigationHolder">
+      {showUser && <div className="pageOverlay"></div>}
+      <div
+        ref={userNavRef}
+        className="userNavigationHolder"
+        style={{ display: showUser ? "block" : "none" }}
+      >
         <div className="userNavigation">
           <div className="rightViewTitleUserName1"></div>
           <h4 className="userNavigationh1">{user.user_name}</h4>
           <p className="userNavigationemail">{user.email}</p>
           <p className="userNavigationemail">{user.phone_number}</p>
           <p className="userNavigationemail">{user.user_type}</p>
-          <button className="logout">Logout</button>
+          <button className="logout" onClick={onLougout}>
+            Logout
+          </button>
         </div>
       </div>
       <h1 className="viewh1">All Road Requests</h1>
@@ -184,6 +222,15 @@ const View = () => {
           <span>New Road Request</span>
         </button>
       </Link>
+      <p className="copyright">
+        <Icon
+          icon="la:copyright-solid"
+          width="11"
+          height="11"
+          className="copyrightIcon"
+        />
+        <span>Copyrigt2025</span>
+      </p>
     </>
   );
 };

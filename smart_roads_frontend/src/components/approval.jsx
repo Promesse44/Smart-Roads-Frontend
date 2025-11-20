@@ -16,6 +16,9 @@ const Approval = () => {
   const [status, setStatus] = useState("");
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
+    const [showUser, setShowUser] = useState(false);
+    const userBtnRef = React.useRef(null);
+    const userNavRef = React.useRef(null);
 
   const getApprovals = () => {
     setLoading(true);
@@ -59,6 +62,29 @@ const Approval = () => {
         setApprovalId(null);
       });
   };
+  const onLougout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  useEffect(() => {
+      function handleClickOutside(event) {
+        if (
+          userNavRef.current &&
+          !userNavRef.current.contains(event.target) &&
+          userBtnRef.current &&
+          !userBtnRef.current.contains(event.target)
+        ) {
+          setShowUser(false);
+        }
+      }
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, []);
 
   return (
     <>
@@ -77,12 +103,32 @@ const Approval = () => {
             <Icon icon="iconamoon:notification" width="20" height="20" />
           </div>
           <div className="rightViewTitleUserName2">
-            <button className="viewProfile1"></button>
+            <button
+              ref={userBtnRef}
+              className="viewProfile1"
+              onClick={() => setShowUser((prev) => !prev)}
+            ></button>
           </div>
           <div className="rightViewTitleUserName2">
             <p className="rightViewTitleSpan">{user.user_name}</p>
             <p className="rightViewTitle">{user.user_type}</p>
           </div>
+        </div>
+      </div>
+      <div
+        ref={userNavRef}
+        className="userNavigationHolder"
+        style={{ display: showUser ? "block" : "none" }}
+      >
+        <div className="userNavigation">
+          <div className="rightViewTitleUserName1"></div>
+          <h4 className="userNavigationh1">{user.user_name}</h4>
+          <p className="userNavigationemail">{user.email}</p>
+          <p className="userNavigationemail">{user.phone_number}</p>
+          <p className="userNavigationemail">{user.user_type}</p>
+          <button className="logout" onClick={onLougout}>
+            Logout
+          </button>
         </div>
       </div>
       <h1 className="approvalH1">Request Approval</h1>
@@ -190,7 +236,8 @@ const Approval = () => {
                     </div>
 
                     <span>
-                      Approved by <strong>{approval.to_be_approved_by}</strong>
+                      {approval.status === "Approved" ? "Approved" : "Rejected"}{" "}
+                      by <strong>{approval.to_be_approved_by}</strong>
                     </span>
                     <Icon
                       icon="mingcute:right-line"
@@ -378,6 +425,15 @@ const Approval = () => {
           );
         })}
       </div>
+      <p className="copyright">
+        <Icon
+          icon="la:copyright-solid"
+          width="11"
+          height="11"
+          className="copyrightIcon"
+        />
+        <span>Copyrigt2025</span>
+      </p>
     </>
   );
 };

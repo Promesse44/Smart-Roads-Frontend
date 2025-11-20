@@ -1,12 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 const SingleRequest = () => {
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const [request, setRequest] = useState(null);
+  const [showUser, setShowUser] = useState(false);
+  const userBtnRef = React.useRef(null);
+  const userNavRef = React.useRef(null);
+
+  const navigate = useNavigate();
+
+  const inputRef = useRef();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        userNavRef.current &&
+        !userNavRef.current.contains(event.target) &&
+        userBtnRef.current &&
+        !userBtnRef.current.contains(event.target)
+      ) {
+        setShowUser(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -63,6 +90,12 @@ const SingleRequest = () => {
       In_progress: "rgba(161, 84, 212, 1)",
     }[usedStatus.status] || "black";
 
+  const onLougout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <>
       <div className="viewTitle">
@@ -81,7 +114,29 @@ const SingleRequest = () => {
               <span>Submit Request</span>
             </button>
           </Link>
-          <button className="viewProfile1"></button>
+          <button
+            className="viewProfile1"
+            ref={userBtnRef}
+            onClick={() => setShowUser((prev) => !prev)}
+          ></button>
+        </div>
+      </div>
+
+      {showUser && <div className="pageOverlay"></div>}
+      <div
+        ref={userNavRef}
+        className="userNavigationHolder"
+        style={{ display: showUser ? "block" : "none" }}
+      >
+        <div className="userNavigation">
+          <div className="rightViewTitleUserName1"></div>
+          <h4 className="userNavigationh1">{user.user_name}</h4>
+          <p className="userNavigationemail">{user.email}</p>
+          <p className="userNavigationemail">{user.phone_number}</p>
+          <p className="userNavigationemail">{user.user_type}</p>
+          <button className="logout" onClick={onLougout}>
+            Logout
+          </button>
         </div>
       </div>
 
@@ -124,7 +179,6 @@ const SingleRequest = () => {
               )}
             </p>
 
-            {/* NOTES */}
             <p className="locatinp1">
               Note appended:{" "}
               <span>
@@ -146,7 +200,6 @@ const SingleRequest = () => {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="singleDescriptionRight">
           <div className="singleDescriptionSubmittedBY">
             <h3>Submitted By</h3>
@@ -173,6 +226,15 @@ const SingleRequest = () => {
           </div>
         </div>
       </div>
+      <p className="copyright">
+        <Icon
+          icon="la:copyright-solid"
+          width="11"
+          height="11"
+          className="copyrightIcon"
+        />
+        <span>Copyrigt2025</span>
+      </p>
     </>
   );
 };

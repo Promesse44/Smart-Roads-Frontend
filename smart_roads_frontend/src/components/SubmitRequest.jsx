@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const SubmitRequest = () => {
   const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
@@ -12,6 +13,9 @@ const SubmitRequest = () => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const latitude = -1.3792473621;
   const longitude = 2.134879082134;
+  const [showUser, setShowUser] = useState(false);
+  const userBtnRef = React.useRef(null);
+  const userNavRef = React.useRef(null);
 
   const navigate = useNavigate();
 
@@ -74,8 +78,75 @@ const SubmitRequest = () => {
       });
   };
 
+  const onLougout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        userNavRef.current &&
+        !userNavRef.current.contains(event.target) &&
+        userBtnRef.current &&
+        !userBtnRef.current.contains(event.target)
+      ) {
+        setShowUser(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
+      <div className="viewTitle">
+        <div className="leftViewTitle">
+          <span className="leftViewTitleSpan">Smart Roads </span>
+          <span className="spna">Add Request</span>
+          <div>
+            <Link className="titleLink" to={"/view"}>
+              All requests
+            </Link>
+          </div>
+        </div>
+        <div className="rightViewTitle1">
+          <div className="rightViewTitleUserName1">
+            <Icon icon="iconamoon:notification" width="20" height="20" />
+          </div>
+          <div className="rightViewTitleUserName2">
+            <button
+              ref={userBtnRef}
+              className="viewProfile1"
+              onClick={() => setShowUser((prev) => !prev)}
+            ></button>
+          </div>
+          <div className="rightViewTitleUserName2">
+            <p className="rightViewTitleSpan">{user.user_name}</p>
+          </div>
+        </div>
+      </div>
+      {showUser && <div className="pageOverlay"></div>}
+      <div
+        ref={userNavRef}
+        className="userNavigationHolder"
+        style={{ display: showUser ? "block" : "none" }}
+      >
+        <div className="userNavigation">
+          <div className="rightViewTitleUserName1"></div>
+          <h4 className="userNavigationh1">{user.user_name}</h4>
+          <p className="userNavigationemail">{user.email}</p>
+          <p className="userNavigationemail">{user.phone_number}</p>
+          <p className="userNavigationemail">{user.user_type}</p>
+          <button className="logout" onClick={onLougout}>
+            Logout
+          </button>
+        </div>
+      </div>
       <div className="submitRequestDiv">
         <h1 className="submitTitleh1">Submit a New Road Request</h1>
         <p className="subitRequestp">
@@ -175,6 +246,15 @@ const SubmitRequest = () => {
           </div>
         </form>
       </div>
+      <p className="copyright">
+        <Icon
+          icon="la:copyright-solid"
+          width="11"
+          height="11"
+          className="copyrightIcon"
+        />
+        <span>Copyrigt2025</span>
+      </p>
     </>
   );
 };
