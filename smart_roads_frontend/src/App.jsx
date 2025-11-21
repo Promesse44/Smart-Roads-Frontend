@@ -11,11 +11,13 @@ function App() {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   const onLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const login = await fetch("http://localhost:8000/login", {
+      const login = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

@@ -3,6 +3,9 @@ import { Icon } from "@iconify/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const View = () => {
+  const API_BASE = (
+    import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
+  ).trim();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const [requests, setRequests] = useState([]);
@@ -20,7 +23,7 @@ const View = () => {
   useEffect(() => {
     setLoading(true);
     try {
-      fetch("http://localhost:8000/request", {
+      fetch(`${API_BASE}/request`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

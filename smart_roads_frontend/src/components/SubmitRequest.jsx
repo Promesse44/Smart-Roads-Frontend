@@ -21,6 +21,10 @@ const SubmitRequest = () => {
 
   const inputRef = useRef();
 
+  const API_BASE = (
+    import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
+  ).trim();
+
   const onFile = (file) => {
     if (!file) return;
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -62,7 +66,7 @@ const SubmitRequest = () => {
     formData.append("latitude", latitude);
     formData.append("longitude", longitude);
 
-    fetch("http://localhost:8000/request", {
+    fetch(`${API_BASE}/request`, {
       method: "POST",
       headers: {
         // "Content-Type": "multipart/form-data",

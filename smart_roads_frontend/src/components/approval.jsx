@@ -3,6 +3,9 @@ import { Icon } from "@iconify/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Approval = () => {
+  const API_BASE = (
+    import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
+  ).trim();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   // const location = useLocation();
@@ -28,7 +31,7 @@ const Approval = () => {
 
   const getApprovals = () => {
     setLoading(true);
-    fetch("http://localhost:8000/approvals", {
+    fetch(`${API_BASE}/approvals`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -47,7 +50,7 @@ const Approval = () => {
   const onApprove = (approval_id, requestId, status, note) => {
     // e.preventDefault();
     console.log(approval_id, requestId, status, note);
-    fetch("http://localhost:8000/approve", {
+    fetch(`${API_BASE}/approve`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,6 +3,9 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 
 const SingleRequest = () => {
+  const API_BASE = (
+    import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
+  ).trim();
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -37,7 +40,7 @@ const SingleRequest = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:8000/request/${id}`, {
+    fetch(`${API_BASE}/request/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +75,6 @@ const SingleRequest = () => {
 
   // const usedStatus = latest || previous;
   let usedStatus;
-
 
   if (!previous) {
     usedStatus = latest;
@@ -180,7 +182,8 @@ const SingleRequest = () => {
                 `Waiting for ${latest.approver_type}'s approval`
               ) : (
                 <>
-                  {usedStatus.status === "Approved" && usedStatus.approver_type === "Government"
+                  {usedStatus.status === "Approved" &&
+                  usedStatus.approver_type === "Government"
                     ? "Approved by "
                     : usedStatus.status === "Rejected"
                     ? "Rejected by "
