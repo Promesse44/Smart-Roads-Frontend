@@ -11,20 +11,35 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const role = "Citizen";
   const navigate = useNavigate();
+  const API_BASE = (
+    import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
+  ).trim();
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:8000/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, phone, password, role }),
-    })
-      .then((res) => res.json())
-      .then((output) => {
-        alert(output.message);
-        console.log(output);
-        navigate("/");
+    try {
+      const res = await fetch(`${API_BASE}/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, phone, role }),
       });
+
+      const output = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        const msg = output.message || output.msg || "Signup failed";
+        alert(msg);
+        console.error("Signup error:", output);
+        return;
+      }
+
+      alert(output.message || output.msg || "Signup successful");
+      console.log(output);
+      navigate("/");
+    } catch (err) {
+      console.error("Network error during signup:", err);
+      alert("Network error: " + (err.message || err));
+    }
   };
 
   return (

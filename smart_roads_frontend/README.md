@@ -1,3 +1,46 @@
+# Smart-Roads Frontend (Vite + React)
+
+This project is the frontend for the Smart-Roads application, built with Vite + React.
+
+## Quick start (local)
+
+```powershell
+cd smart_roads_frontend
+npm install
+npm run dev
+```
+
+To build for production:
+
+```powershell
+npm run build
+npm run preview
+```
+
+## Environment variables
+
+The frontend uses Vite environment variables at build time. The important variable is:
+
+- `VITE_API_BASE_URL` — the base URL of the backend API (example: `https://smart-roads-ozka.onrender.com`).
+
+Place this in a `.env` file or in your Netlify / hosting environment variables. Vite only exposes env vars prefixed with `VITE_` to the client.
+
+## Deployment (Netlify)
+
+Recommended settings when you connect your Git repo to Netlify:
+
+- **Base directory**: leave empty (`.`) if this repo contains only the frontend project. If the frontend is inside a subfolder in a monorepo, set this to the relative path (`smart_roads_frontend`).
+- **Build command**: `npm run build`
+- **Publish directory**: `dist`
+- **Environment variable** on Netlify: `VITE_API_BASE_URL` with your Render backend URL.
+
+I've included a `netlify.toml` file to set the build and single-page-app redirect.
+
+## Notes
+
+- The frontend was updated to read `import.meta.env.VITE_API_BASE_URL` with a sensible fallback. If you change the backend URL, update the Netlify env var and redeploy.
+- Avoid committing secret keys to the repo. Only the public API base URL is required for the frontend.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
