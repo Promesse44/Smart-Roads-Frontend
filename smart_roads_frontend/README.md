@@ -87,11 +87,7 @@ Default dev ports:
 
 ## Screenshots
 
-Add screenshot files to `docs/screenshots/` and reference them here. Example:
-
-```md
-![App dashboard screenshot](docs/screenshots/dashboard.png)
-```
+Screenshots are intentionally omitted from this repository per the owner's preference.
 
 ## Deployed app
 
