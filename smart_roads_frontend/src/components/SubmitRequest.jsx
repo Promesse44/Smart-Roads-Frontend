@@ -25,6 +25,7 @@ const SubmitRequest = () => {
     import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
   ).trim();
 
+  // handle selecting or dropping a new file and preview it
   const onFile = (file) => {
     if (!file) return;
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -54,6 +55,7 @@ const SubmitRequest = () => {
   //   if (inputRef.current) inputRef.current.value = "";
   // };
 
+  // Submit new request to backend (uploads photo in multipart form)
   const onSubmit = (e) => {
     e.preventDefault();
 

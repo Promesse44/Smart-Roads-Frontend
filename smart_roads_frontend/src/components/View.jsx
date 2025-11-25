@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const View = () => {
+  // API base (Vite env) used for fetch requests
   const API_BASE = (
     import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
   ).trim();
@@ -21,6 +22,7 @@ const View = () => {
   // const { user } = location.state;
 
   useEffect(() => {
+    // load requests from backend and update local state
     setLoading(true);
     try {
       fetch(`${API_BASE}/request`, {
@@ -33,6 +35,7 @@ const View = () => {
         .then((res) => res.json())
         .then((output) => {
           console.log("Fecthed requests: ", output);
+          // set fetched requests into state
           setRequests(output);
           setLoading(false);
         });

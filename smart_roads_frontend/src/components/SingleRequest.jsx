@@ -20,6 +20,7 @@ const SingleRequest = () => {
 
   const inputRef = useRef();
 
+  // load a single request by id (on mount or when id changes)
   useEffect(() => {
     function handleClickOutside(event) {
       if (

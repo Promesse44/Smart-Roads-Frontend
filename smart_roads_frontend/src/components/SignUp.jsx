@@ -11,10 +11,12 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const role = "Citizen";
   const navigate = useNavigate();
+  // API base URL (set via Vite env at build time)
   const API_BASE = (
     import.meta.env.VITE_API_BASE_URL || "https://smart-roads-ozka.onrender.com"
   ).trim();
 
+  // form submit - sign up a new user
   const onSignUp = async (e) => {
     e.preventDefault();
     try {

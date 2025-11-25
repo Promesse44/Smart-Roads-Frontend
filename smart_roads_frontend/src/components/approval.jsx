@@ -29,6 +29,7 @@ const Approval = () => {
   //   return null;
   // }
 
+  // fetch approvals assigned to the current user
   const getApprovals = () => {
     setLoading(true);
     fetch(`${API_BASE}/approvals`, {
@@ -47,6 +48,7 @@ const Approval = () => {
   }, [token]);
   // console.log(JSON.stringify(approvals, null, 2));
 
+  // Approve or reject an approval item, update backend
   const onApprove = (approval_id, requestId, status, note) => {
     // e.preventDefault();
     console.log(approval_id, requestId, status, note);
