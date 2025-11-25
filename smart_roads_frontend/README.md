@@ -41,6 +41,63 @@ I've included a `netlify.toml` file to set the build and single-page-app redirec
 - The frontend was updated to read `import.meta.env.VITE_API_BASE_URL` with a sensible fallback. If you change the backend URL, update the Netlify env var and redeploy.
 - Avoid committing secret keys to the repo. Only the public API base URL is required for the frontend.
 
+## Features
+
+- View all road requests and details
+- Submit a new request with a photo
+- React Router — single page app with navigation
+
+## System Requirements
+
+- Node.js 18+
+- npm 8+ or yarn
+- Browser supporting modern JS (Edge/Chrome/Firefox/Safari)
+
+## Tech used
+
+- React (Vite), React Router Dom
+- Iconify, FontAwesome
+
+## Step-by-step setup
+
+1. Clone the repo
+2. For backend (server):
+
+```powershell
+cd Smart-Roads
+npm install
+npm run db:migrate
+npm run dev
+```
+
+3. For frontend:
+
+```powershell
+cd Smart-Roads-Frontend/smart_roads_frontend
+npm install
+npm run dev
+```
+
+4. Set `.env` using `.env.example` (create from `.env.example` and set your values).
+
+Default dev ports:
+
+- Backend: 10000
+- Frontend (Vite): 5173
+
+## Screenshots
+
+Add screenshot files to `docs/screenshots/` and reference them here. Example:
+
+```md
+![App dashboard screenshot](docs/screenshots/dashboard.png)
+```
+
+## Deployed app
+
+- Backend (example): `https://smart-roads-ozka.onrender.com`
+- Frontend (example): `https://<your-site>.netlify.app` (replace with your Netlify URL)
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
